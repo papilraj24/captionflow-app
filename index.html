@@ -15,12 +15,13 @@
 <script>
 // This page itself never changes, so it's safe for it to be cached by the
 // browser or GitHub's CDN. The actual redirect target is fetched fresh on
-// every load from raw.githubusercontent.com (updates instantly on push,
-// unlike the Pages CDN which can lag) with a cache-busting query param as
-// a second safety net against any caching layer in between.
-var CURRENT_URL_SOURCE = 'https://raw.githubusercontent.com/papilraj24/captionflow-app/main/current-url.txt';
+// every load from the GitHub REST API, which caches only 60s (vs. 5-10
+// minutes for raw.githubusercontent.com or the Pages CDN, both of which
+// also ignore cache-busting query params entirely) — the shortest-lived
+// cache of any GitHub-hosted option, so a restart propagates fastest here.
+var CURRENT_URL_SOURCE = 'https://api.github.com/repos/papilraj24/captionflow-app/contents/current-url.txt';
 
-fetch(CURRENT_URL_SOURCE + '?_=' + Date.now(), { cache: 'no-store' })
+fetch(CURRENT_URL_SOURCE, { headers: { 'Accept': 'application/vnd.github.raw' }, cache: 'no-store' })
   .then(function(r) { return r.text(); })
   .then(function(url) {
     url = url.trim();
