@@ -1,1 +1,1 @@
-https://uniprotkb-experience-simulation-planet.trycloudflare.com
+https://api.trycloudflare.com
