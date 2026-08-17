@@ -1,1 +1,1 @@
-https://heavily-pool-washington-regulations.trycloudflare.com
+https://api.trycloudflare.com
