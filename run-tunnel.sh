@@ -5,7 +5,7 @@ LOG=/tmp/captionflow-tunnel.log
 UPDATE_SCRIPT="$(cd "$(dirname "$0")" && pwd)/update-redirect.sh"
 
 : > "$LOG"
-/opt/homebrew/bin/cloudflared tunnel --url http://localhost:5001 >> "$LOG" 2>&1 &
+/opt/homebrew/bin/cloudflared tunnel --protocol http2 --url http://localhost:5001 >> "$LOG" 2>&1 &
 CF_PID=$!
 
 # Wait for the URL to appear in the log, then push the redirect update.
